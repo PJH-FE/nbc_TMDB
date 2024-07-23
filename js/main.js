@@ -12,12 +12,13 @@ let loadMovie = (v) => {
     fetch("https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1", options)
         .then((response) => response.json())
         .then((response) => {
-            response.results.forEach((i) => {
+            console.log(response.results)
+            response.results.map((i) => {
                 let ratingStar = Math.round(i.vote_average) >= 9 ? "⭐⭐⭐⭐⭐" : "⭐⭐⭐⭐"; // 별점
 
                 if (typeof v === null || v === undefined || v === "") {
                     document.getElementById("movie-list").insertAdjacentHTML("beforeend",`
-                        <li class="card" onclick="alert('영화 id : ${i.id}')">
+                        <li class="card" onclick="alert('영화의 ID는 ${i.id}입니다.')">
                             <div class="poster"><img src="https://image.tmdb.org/t/p/original${i.poster_path}" alt="${i.title}"></div>
                             <div class="info">
                                 <div class="title">${i.title}</div>
@@ -117,6 +118,7 @@ window.onload = function () {
     });
 
 
+    // 로고 클릭시 상단으로 부드럽게 스크롤
     const logo = document.querySelector('.logo');
     logo.addEventListener("click",()=>{
         window.scrollTo({
