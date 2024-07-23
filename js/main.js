@@ -12,7 +12,6 @@ let loadMovie = (v) => {
     fetch("https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1", options)
         .then((response) => response.json())
         .then((response) => {
-            console.log(response)
             response.results.forEach((i) => {
                 let ratingStar = Math.round(i.vote_average) >= 9 ? "⭐⭐⭐⭐⭐" : "⭐⭐⭐⭐"; // 별점
 
@@ -115,5 +114,14 @@ window.onload = function () {
             document.getElementById("movie-list").innerHTML = "";
             loadMovie();
         };
+    });
+
+
+    const logo = document.querySelector('.logo');
+    logo.addEventListener("click",()=>{
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+        });
     });
 };

@@ -4,7 +4,7 @@
 *::after {
   box-sizing: border-box;
 
-  font-family: "Open Sans", "Noto Sans KR" sans-serif;
+  font-family: "Open Sans", "Noto Sans KR", sans-serif;
 }
 
 /* 폰트 크기의 팽창을 방지합니다. */
