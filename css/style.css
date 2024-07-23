@@ -1,0 +1,138 @@
+body {
+    margin: 0;
+    width: 100%;
+    min-width: 480px;
+    background-color: #1a1a1a;
+}
+
+#header {
+    z-index: 101;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #1a1a1a;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    min-width: 480px;
+    height: 80px;
+    margin: 0 auto;
+    padding: 12px 4%;
+}
+.header-blank {
+    display: block;
+    height: 80px;
+}
+
+#header .logo {
+    text-decoration: none;
+    color: #fff;
+    font-size: 32px;
+    font-family: "Cinzel Decorative", serif;
+    font-weight: 700;
+}
+
+/* 검색창 */
+#header .search-box {
+    border-bottom: 1px solid #fff;
+}
+
+#header .search-box #search {
+    outline: none;
+    background-color: transparent;
+    border: 0;
+    font-size: 14px;
+    color: #fff;
+    line-height: 30px;
+    height: 30px;
+}
+
+#header .search-box button {
+    background: none;
+    padding: 0;
+    border: 0;
+    color: #fff;
+    width: 16px;
+    height: 16px;
+}
+
+/* 영화 목록 */
+#movie-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(33.33%, auto));
+    padding: 0;
+    margin: 0 auto;
+    max-width: 1280px;
+}
+#movie-list li.card {
+    position: relative;
+    list-style: none;
+}
+#movie-list li.card:nth-child(6n) {
+    grid-column: 2/4;
+}
+#movie-list li.card:nth-child(6n + 1) {
+    grid-column: 1/3;
+}
+
+/* 영화 포스터 */
+#movie-list li.card .poster {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+#movie-list li.card .poster img {
+    min-width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+}
+
+/* 영화 정보 */
+#movie-list li.card .info {
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    height: 100%;
+    padding: 4%;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    word-break: keep-all;
+    text-align: center;
+    transition: 0.5s;
+    cursor: pointer;
+    overflow-y: auto;
+}
+#movie-list li.card:hover .info {
+    opacity: 1;
+    visibility: visible;
+}
+
+#movie-list li.card .info .title {
+    margin-top: auto;
+    font-size: 24px;
+    font-weight: 700;
+}
+#movie-list li.card .info .overview {
+    margin-bottom: auto;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+@media (min-width: 720px) {
+    #movie-list li.card.big-title .info .title {
+        font-size: 32px;
+    }
+    #movie-list li.card.big-title .info .overview {
+        font-size: 24px;
+    }
+}

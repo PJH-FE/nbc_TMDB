@@ -1,11 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>영화 검색사이트</title>
+
+    <!-- JS -->
+    <script src="./js/main.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="./css/reset.css">
+    </link>
+    <link rel="stylesheet" href="./css/style.css">
+    </link>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
 </head>
+
 <body>
-    
+    <div id="header">
+        <a href="#movie-list" class="logo">Movie List</a>
+
+        <div class="search-box">
+            <input id="search" type="text" placeholder="영화제목을 입력하세요." />
+            <button id="search-btn" onclick="searchMovie()" class="submit"><img src="./img/search.svg"
+                    alt="검색 아이콘"></button>
+        </div>
+    </div>
+    <span class="header-blank"></span>
+
+    <ul id="movie-list">
+    </ul>
 </body>
+
 </html>
