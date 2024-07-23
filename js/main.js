@@ -9,6 +9,7 @@ const options = {
 
 // 영화 목록 불러오기
 let loadMovie = (v) => {
+    document.querySelector('body').style.opacity = "0";
     fetch("https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1", options)
         .then((response) => response.json())
         .then((response) => {
@@ -28,8 +29,9 @@ let loadMovie = (v) => {
                     `
                     );
                 } else {
-                    let title = i.title.toLowerCase();
-                    if (title.indexOf(v.toLowerCase()) != -1) {
+                    let title = i.title.toLowerCase().replace(' ','');
+                    
+                    if (title.indexOf(v.toLowerCase().replace(' ','')) != -1) {
                         document.getElementById("movie-list").insertAdjacentHTML(
                             "beforeend",
                             `
@@ -92,6 +94,8 @@ function makeGrid() {
             rowStart += 2;
         }
     }
+
+    document.querySelector('body').style.opacity = "1";
 };
 
 
