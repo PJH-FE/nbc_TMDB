@@ -142,6 +142,8 @@ window.onload = function () {
     let docWidth = window.innerWidth;
     if ( docWidth >= 750) {
         document.querySelector('html').style.fontSize = "62.5%";
+    } else if (docWidth >= 480) {
+        document.querySelector('html').style.fontSize = (62.5 * ( docWidth / 750 )) + "%";
     } else {
         document.querySelector('html').style.fontSize = (62.5 * ( 480 / 750 )) + "%";
     }
@@ -150,6 +152,8 @@ window.onload = function () {
         docWidth = window.innerWidth;
         if ( docWidth >= 750) {
             document.querySelector('html').style.fontSize = "62.5%";
+        } else if (docWidth >= 480) {
+            document.querySelector('html').style.fontSize = (62.5 * ( docWidth / 750 )) + "%";
         } else {
             document.querySelector('html').style.fontSize = (62.5 * ( 480 / 750 )) + "%";
         }
