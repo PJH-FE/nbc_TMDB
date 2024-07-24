@@ -136,4 +136,25 @@ window.onload = function () {
             behavior: "smooth",
         });
     });
+
+
+    /* 반응형 1rem 지정 */ 
+    let docWidth = window.innerWidth;
+    if ( docWidth >= 750) {
+        document.querySelector('html').style.fontSize = "62.5%";
+    } else if ( docWidth < 750 && docWidth >= 360 ){
+        document.querySelector('html').style.fontSize = (62.5 * ( 750 / 1280 )) + "%";
+    } else {
+        document.querySelector('html').style.fontSize = (62.5 * ( docWidth / 750 )) + "%";
+    }
+
+	// jQuery(window).resize(function(){
+	// 	if( jQuery(window).width() >= 750 ){
+	// 		jQuery('html').css('font-size','62.5%');
+	// 	} else if ( jQuery(window).width() <= 475) {
+	// 		jQuery('html').css('font-size', (62.5 * ( 475 / 750 )) + '%');
+	// 	} else {
+	// 		jQuery('html').css('font-size', (62.5 * ( jQuery(window).width() / 750 )) + '%');
+	// 	}
+	// });
 };

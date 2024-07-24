@@ -9,6 +9,7 @@
 
 /* 폰트 크기의 팽창을 방지합니다. */
 html {
+  font-size: 62.5%;
   -moz-text-size-adjust: none;
   -webkit-text-size-adjust: none;
   text-size-adjust: none;
