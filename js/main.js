@@ -140,14 +140,8 @@ window.onload = function () {
 
 
     // 로고, 탑버튼 클릭시 상단으로 부드럽게 스크롤
-    const logo = document.querySelector('.logo');
     const topBtn = document.querySelector('#top-btn');
-    logo.addEventListener("click",()=>{
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth",
-        });
-    });
+
     topBtn.addEventListener("click",()=>{
         window.scrollTo({
             top: 0,
