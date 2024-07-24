@@ -16,7 +16,7 @@ let loadMovie = (v) => {
             response.results.map((i) => {
                 let ratingStar = Math.round(i.vote_average) >= 9 ? "⭐⭐⭐⭐⭐" : "⭐⭐⭐⭐"; // 별점
 
-                if (typeof v === null || v === undefined || v === "") {
+                if (v === null || v === undefined || v === "") {
                     document.getElementById("movie-list").insertAdjacentHTML("beforeend",`
                         <li class="card">
                             <div class="poster"><img src="https://image.tmdb.org/t/p/original${i.poster_path}" alt="${i.title}"></div>
@@ -31,7 +31,7 @@ let loadMovie = (v) => {
                 } else {
                     let title = i.title.toLowerCase().replace(' ','');
                     
-                    if (title.indexOf(v.toLowerCase().replace(' ','')) != -1) {
+                    if (title.indexOf(v.toLowerCase().replace(' ','')) !== -1) {
                         document.getElementById("movie-list").insertAdjacentHTML(
                             "beforeend",
                             `
@@ -53,10 +53,10 @@ let loadMovie = (v) => {
             
             // 검색된 영화 갯수 제거
             let resultDiv = document.querySelector('.result-count');
-            if(typeof resultDiv != null && resultDiv != undefined && resultDiv != "") document.querySelector('.result-count').remove();
+            if(resultDiv === null || resultDiv === undefined || resultDiv === ""){} else document.querySelector('.result-count').remove();
 
             // 검색어가 있을 때
-            if (typeof v != null && v != undefined && v != ""){
+            if (v === null || v === undefined || v === ""){} else{
                 // 일치하는 검색어가 없을경우, 얼럿 노출 후 검색창과 영화목록 초기화
                 if(document.querySelectorAll(".card").length == 0){
                     alert('일치하는 영화가 없습니다.');
