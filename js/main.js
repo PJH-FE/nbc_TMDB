@@ -18,9 +18,9 @@ let loadMovie = (v) => {
 
                 if (typeof v === null || v === undefined || v === "") {
                     document.getElementById("movie-list").insertAdjacentHTML("beforeend",`
-                        <li class="card" onclick="alert('영화의 ID는 ${i.id}입니다.')">
+                        <li class="card">
                             <div class="poster"><img src="https://image.tmdb.org/t/p/original${i.poster_path}" alt="${i.title}"></div>
-                            <div class="info">
+                            <div class="info" onclick="alert('영화의 ID는 ${i.id}입니다.')">
                                 <div class="title">${i.title}</div>
                                 <div class="vote-average">Rating : ${ratingStar} (${i.vote_average})</div>
                                 <div class="overview">${i.overview}</div>
@@ -35,9 +35,9 @@ let loadMovie = (v) => {
                         document.getElementById("movie-list").insertAdjacentHTML(
                             "beforeend",
                             `
-                            <li class="card" onclick="alert('영화 id : ${i.id}')">
+                            <li class="card">
                                 <div class="poster"><img src="https://image.tmdb.org/t/p/original${i.poster_path}" alt="${i.title}"></div>
-                                <div class="info">
+                                <div class="info" onclick="alert('영화의 ID는 ${i.id}입니다.')">
                                     <div class="title">${i.title}</div>
                                     <div class="vote-average">Rating : ${ratingStar} (${i.vote_average})</div>
                                     <div class="overview">${i.overview}</div>
@@ -47,9 +47,9 @@ let loadMovie = (v) => {
                         );
                     }
                 }
-
-                makeGrid();
             });
+
+            makeGrid();
 
             // 일치하는 검색어가 없을경우, 얼럿 노출 후 검색창과 영화목록 초기화
             if(document.querySelectorAll(".card").length == 0){
@@ -142,19 +142,16 @@ window.onload = function () {
     let docWidth = window.innerWidth;
     if ( docWidth >= 750) {
         document.querySelector('html').style.fontSize = "62.5%";
-    } else if ( docWidth < 750 && docWidth >= 360 ){
-        document.querySelector('html').style.fontSize = (62.5 * ( 750 / 1280 )) + "%";
     } else {
-        document.querySelector('html').style.fontSize = (62.5 * ( docWidth / 750 )) + "%";
+        document.querySelector('html').style.fontSize = (62.5 * ( 480 / 750 )) + "%";
     }
 
-	// jQuery(window).resize(function(){
-	// 	if( jQuery(window).width() >= 750 ){
-	// 		jQuery('html').css('font-size','62.5%');
-	// 	} else if ( jQuery(window).width() <= 475) {
-	// 		jQuery('html').css('font-size', (62.5 * ( 475 / 750 )) + '%');
-	// 	} else {
-	// 		jQuery('html').css('font-size', (62.5 * ( jQuery(window).width() / 750 )) + '%');
-	// 	}
-	// });
+    window.addEventListener('resize', () => {
+        docWidth = window.innerWidth;
+        if ( docWidth >= 750) {
+            document.querySelector('html').style.fontSize = "62.5%";
+        } else {
+            document.querySelector('html').style.fontSize = (62.5 * ( 480 / 750 )) + "%";
+        }
+    })
 };

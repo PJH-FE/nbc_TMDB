@@ -122,6 +122,9 @@ body {
     font-size: 2.4rem;
     font-weight: 700;
 }
+#movie-list li.card .info .vote-average {
+    font-size: 1.6rem;
+}
 #movie-list li.card .info .overview {
     margin-bottom: auto;
     font-size: 1.8rem;
