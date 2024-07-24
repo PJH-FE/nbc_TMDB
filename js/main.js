@@ -139,7 +139,7 @@ window.onload = function () {
     });
 
 
-    // 로고, 탑버튼 클릭시 상단으로 부드럽게 스크롤
+    // 탑버튼 클릭시 상단으로 부드럽게 스크롤
     const topBtn = document.querySelector('#top-btn');
 
     topBtn.addEventListener("click",()=>{
