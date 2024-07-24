@@ -57,13 +57,32 @@ body {
     height: 16px;
 }
 
+#wrap {
+    padding: 0;
+    margin: 0 auto;
+    max-width: 1280px;
+}
+
+/* 검색 Count */
+.result-count {
+    color: #fff;
+    font-size: 1.4rem;
+    font-weight: 400;
+    padding: 1.2rem 2.4rem;
+    border-bottom: 1px solid #fff;
+}
+.result-count span {
+    margin: 0 4px;
+    font-weight: 700;
+    font-size: 1.8rem;
+}
+
 /* 영화 목록 */
 #movie-list {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(33.33%, auto));
+    margin: 0;
     padding: 0;
-    margin: 0 auto;
-    max-width: 1280px;
 }
 #movie-list li.card {
     position: relative;

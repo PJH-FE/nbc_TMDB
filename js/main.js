@@ -50,18 +50,36 @@ let loadMovie = (v) => {
             });
 
             makeGrid();
+            
+            // 검색된 영화 갯수 제거
+            let resultDiv = document.querySelector('.result-count');
+            if(typeof resultDiv != null && resultDiv != undefined && resultDiv != "") document.querySelector('.result-count').remove();
 
-            // 일치하는 검색어가 없을경우, 얼럿 노출 후 검색창과 영화목록 초기화
-            if(document.querySelectorAll(".card").length == 0){
-                alert('일치하는 영화가 없습니다.');
-                document.getElementById("movie-list").classList.remove("search-result");
-                document.getElementById("search").value = null;
-                loadMovie();
-            };
+            // 검색어가 있을 때
+            if (typeof v != null && v != undefined && v != ""){
+                // 일치하는 검색어가 없을경우, 얼럿 노출 후 검색창과 영화목록 초기화
+                if(document.querySelectorAll(".card").length == 0){
+                    alert('일치하는 영화가 없습니다.');
+                    document.getElementById("movie-list").classList.remove("search-result");
+                    document.getElementById("search").value = null;
+                    loadMovie();
+                } else {
+                    // 검색된 영화 갯수 출력
+                    document.getElementById('movie-list').before(resultCount(document.getElementById('movie-list').childElementCount))
+                }
+            }
         })
         .catch((err) => console.error(err));
 };
 
+// 검색된 영화 갯수 div생성 (createElement 써보기)
+function resultCount(count) {
+    let result = document.createElement('div');
+    result.className = 'result-count';
+    result.innerHTML = `검색된 영화는 총 <span>${count}</span>개 입니다.`;
+    
+    return result;
+}
 
 // 검색어로 영화찾기
 function searchMovie() {
