@@ -12,17 +12,17 @@ body {
     left: 0;
     background-color: #1a1a1a;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
     width: 100%;
     min-width: 360px;
-    height: 80px;
+    min-height: 80px;
     margin: 0 auto;
     padding: 1.2rem 2.4rem;
 }
 .header-blank {
     display: block;
-    height: 80px;
 }
 
 #header .logo {
@@ -44,12 +44,23 @@ body {
 #header .cate a {
     color: #fff;
     text-decoration: none;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
 }
 #header .cate a.now {
     text-decoration: underline;
     text-underline-offset: 8px;
     font-weight: 700;
+}
+
+@media (max-width: 720px) {
+    #header .cate {
+        width: 100%;
+        padding-left: 0;
+        order: 2;;
+    }
+    #header .cate a {
+        font-size: 14px;
+    }
 }
 
 /* 검색창 */
@@ -204,7 +215,9 @@ body {
 }
 
 #paging a {
-    display: flex; align-items: center; justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 24px;
     height: 24px;
     text-decoration: none;

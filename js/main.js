@@ -19,7 +19,6 @@ if (region === "ko") {
 }
 region = lang.substring(3);
 
-
 // 영화 목록 불러오기
 let loadMovie = (v, currLang, currRegion, currCate, currPage) => {
     document.querySelector("body").style.opacity = "0";
@@ -33,28 +32,28 @@ let loadMovie = (v, currLang, currRegion, currCate, currPage) => {
     fetch(`https://api.themoviedb.org/3/movie/${currCate}?language=${currLang}&page=${currPage}&region=${currRegion}`, options)
         .then((response) => response.json())
         .then((response) => {
-            document.querySelectorAll('#paging ol li').forEach((i)=>{
-                parseInt(i.innerText) > response.total_pages ? i.style.display = "none" : i.style.display = "block";
-            })
-            
+            document.querySelectorAll("#paging ol li").forEach((i) => {
+                parseInt(i.innerText) > response.total_pages ? (i.style.display = "none") : (i.style.display = "block");
+            });
+
             response.results.map((i) => {
                 let ratingStar = Math.round(i.vote_average); // 별점
-                if( ratingStar >= 9){ 
-                    ratingStar = "⭐⭐⭐⭐⭐"
-                } else if(ratingStar >= 7){
-                    ratingStar = "⭐⭐⭐⭐"
-                } else if(ratingStar >= 5){
-                    ratingStar = "⭐⭐⭐"
-                } else if(ratingStar >= 3){
-                    ratingStar = "⭐⭐"
-                } else{
-                    ratingStar = "⭐"
-                };
+                if (ratingStar >= 9) {
+                    ratingStar = "⭐⭐⭐⭐⭐";
+                } else if (ratingStar >= 7) {
+                    ratingStar = "⭐⭐⭐⭐";
+                } else if (ratingStar >= 5) {
+                    ratingStar = "⭐⭐⭐";
+                } else if (ratingStar >= 3) {
+                    ratingStar = "⭐⭐";
+                } else {
+                    ratingStar = "⭐";
+                }
 
                 let alertMsg;
-                if ( currRegion === "KR" ){
+                if (currRegion === "KR") {
                     alertMsg = `영화의 ID는 ${i.id}입니다.`;
-                } else if ( currRegion === "JP" ) {
+                } else if (currRegion === "JP") {
                     alertMsg = `映画のIDは$ {i.id}です。`;
                 } else {
                     alertMsg = `The ID of the movie is ${i.id}`;
@@ -108,13 +107,13 @@ let loadMovie = (v, currLang, currRegion, currCate, currPage) => {
             } else {
                 // 일치하는 검색어가 없을경우, 얼럿 노출 후 검색창과 영화목록 초기화
                 if (document.querySelectorAll(".card").length == 0) {
-                    isLang = document.querySelector("#global a.now").getAttribute('id')
+                    isLang = document.querySelector("#global a.now").getAttribute("id");
                     isRegion = isLang.substring(3);
-                
+
                     let noResult;
-                    if ( isRegion === "KR" ){
+                    if (isRegion === "KR") {
                         noResult = "일치하는 영화가 없습니다.";
-                    } else if ( isRegion === "JP" ) {
+                    } else if (isRegion === "JP") {
                         noResult = "「一致する映画はありません。」";
                     } else {
                         noResult = "There are no matching movies.";
@@ -133,23 +132,21 @@ let loadMovie = (v, currLang, currRegion, currCate, currPage) => {
         .catch((err) => console.error(err));
 };
 
-
 // 변수명 생성
 let isCate;
 let isLang;
 let isRegion;
 let isPage;
 
-
 // 검색된 영화 갯수 div생성 (createElement 써보기)
 function resultCount(count) {
-    isLang = document.querySelector("#global a.now").getAttribute('id')
+    isLang = document.querySelector("#global a.now").getAttribute("id");
     isRegion = isLang.substring(3);
 
     let totalMsg;
-    if ( isRegion === "KR" ){
+    if (isRegion === "KR") {
         totalMsg = `검색된 영화는 총 <span>${count}</span>개입니다.`;
-    } else if ( isRegion === "JP" ) {
+    } else if (isRegion === "JP") {
         totalMsg = `検索された映画は合計$ <span>${count}</span>です`;
     } else {
         totalMsg = `A total of <span>${count}</span> movies were searched.`;
@@ -167,13 +164,25 @@ function searchMovie() {
     let keyword = document.getElementById("search").value;
     if (typeof keyword === null || keyword === undefined || keyword === "") {
         // 검색어가 없을 경우
-        alert("영화 제목을 입력하세요.");
+        isLang = document.querySelector("#global a.now").getAttribute("id");
+        isRegion = isLang.substring(3);
+
+        let errMsg;
+        if (isRegion === "KR") {
+            errMsg = "영화 제목을 입력하세요.";
+        } else if (isRegion === "JP") {
+            errMsg = "映画のタイトルを入力してください。";
+        } else {
+            errMsg = "Please enter the movie title.";
+        }
+
+        alert(errMsg);
     } else {
         document.getElementById("movie-list").classList.add("search-result");
         document.getElementById("movie-list").innerHTML = "";
-        
+
         isCate = document.querySelector(".cate a.now").getAttribute("href").replace("#", "");
-        isLang = document.querySelector("#global a.now").getAttribute('id')
+        isLang = document.querySelector("#global a.now").getAttribute("id");
         isRegion = isLang.substring(3);
         isPage = document.querySelector("#paging li a.now").getAttribute("href");
 
@@ -208,31 +217,30 @@ function makeGrid() {
 
 // 윈도우 로딩 완료되면
 window.onload = function () {
-	getCookie('language') != undefined && (isLang = getCookie('language'));
-	getCookie('region') != undefined && (isRegion = getCookie('region'));
-	getCookie('page') != undefined && (isPage = getCookie('page'));
+    getCookie("language") != undefined && (isLang = getCookie("language"));
+    getCookie("region") != undefined && (isRegion = getCookie("region"));
+    getCookie("page") != undefined && (isPage = getCookie("page"));
 
-    isCate = location.href.split('#')[1];
+    isCate = location.href.split("#")[1];
     document.querySelector("#global a.now").classList.remove("now");
-    document.querySelector('#global #' + isLang).classList.add("now")
-    
-    loadMovie(null, isLang, isRegion, isCate, isPage); // 영화 불러오기
+    document.querySelector("#global #" + isLang).classList.add("now");
 
+    loadMovie(null, isLang, isRegion, isCate, isPage); // 영화 불러오기
 
     // 로고 클릭시 기본화면으로const topBtn = document.querySelector("#top-btn");
     let logo = document.querySelector("a.logo");
-    logo.setAttribute('href', location.pathname);
+    logo.setAttribute("href", location.pathname);
     logo.addEventListener("click", (e) => {
-        delCookie('language');
-        delCookie('region');
-        delCookie('page');
+        delCookie("language");
+        delCookie("region");
+        delCookie("page");
     });
 
     // 카테고리 클릭시
     let cate = document.querySelectorAll(".cate > a");
 
     cate.forEach((item) => {
-        if( item.getAttribute('href') === '#' + isCate ){
+        if (item.getAttribute("href") === "#" + isCate) {
             document.querySelector(".cate a.now").classList.remove("now");
             item.classList.add("now");
         }
@@ -240,20 +248,19 @@ window.onload = function () {
         item.addEventListener("click", () => {
             if (!item.classList.contains("now")) {
                 // 페이징 초기화
-                delCookie('page');
+                delCookie("page");
                 document.querySelector("#paging a.now").classList.remove("now");
-                document.querySelector("#paging ol").firstElementChild.firstElementChild.classList.add("now")
+                document.querySelector("#paging ol").firstElementChild.firstElementChild.classList.add("now");
 
                 document.getElementById("movie-list").innerHTML = ""; // 영화목록 초기화
 
                 // 현재 카테고리 강조
                 document.querySelector(".cate a.now").classList.remove("now");
                 item.classList.add("now");
-                
 
                 // 현재 카테고리의 영화 불러오기
                 let nowCate = item.getAttribute("href").replace("#", "");
-                isLang = document.querySelector("#global a.now").getAttribute('id')
+                isLang = document.querySelector("#global a.now").getAttribute("id");
                 isRegion = isLang.substring(3);
                 loadMovie(null, isLang, isRegion, nowCate, 1);
             }
@@ -264,9 +271,8 @@ window.onload = function () {
     searchInput.focus(); // 검색창에 포커스
 
     searchInput.addEventListener("keyup", function (e) {
-        
         isCate = document.querySelector(".cate a.now").getAttribute("href").replace("#", "");
-        isLang = document.querySelector("#global a.now").getAttribute('id')
+        isLang = document.querySelector("#global a.now").getAttribute("id");
         isRegion = isLang.substring(3);
         isPage = document.querySelector("#paging li a.now").getAttribute("href");
 
@@ -283,7 +289,6 @@ window.onload = function () {
         }
     });
 
-
     // 언어 선택시
     let global = document.querySelectorAll("#global ul li a");
 
@@ -292,23 +297,22 @@ window.onload = function () {
             if (!flag.classList.contains("now")) {
                 document.getElementById("search").value = ""; // 검색창 초기화
                 // 페이징 초기화
-                delCookie('page');
+                delCookie("page");
                 document.querySelector("#paging a.now").classList.remove("now");
-                document.querySelector("#paging ol").firstElementChild.firstElementChild.classList.add("now")
-                
+                document.querySelector("#paging ol").firstElementChild.firstElementChild.classList.add("now");
 
-                let nowLang = flag.getAttribute('id');
+                let nowLang = flag.getAttribute("id");
                 let nowRegion = nowLang.substring(3);
 
-                setCookie('language', nowLang, 1);
-                setCookie('region', nowRegion, 1);
+                setCookie("language", nowLang, 1);
+                setCookie("region", nowRegion, 1);
 
                 document.querySelector("#global a.now").classList.remove("now");
-                flag.classList.add("now"); 
+                flag.classList.add("now");
                 document.getElementById("movie-list").innerHTML = "";
 
-                isCate = location.href.split('#')[1];
-                !!isCate ? loadMovie(null, nowLang, nowRegion, isCate, 1) : loadMovie(null, nowLang, nowRegion, null, 1)
+                isCate = location.href.split("#")[1];
+                !!isCate ? loadMovie(null, nowLang, nowRegion, isCate, 1) : loadMovie(null, nowLang, nowRegion, null, 1);
             }
         });
     });
@@ -317,26 +321,25 @@ window.onload = function () {
     let paging = document.querySelectorAll("#paging li a");
 
     paging.forEach((page) => {
-        getCookie('page') != undefined && (isPage = getCookie('page'));
-        
-        if( isPage === page.innerText ){
+        getCookie("page") != undefined && (isPage = getCookie("page"));
+
+        if (isPage === page.innerText) {
             document.querySelector("#paging a.now").classList.remove("now");
-            page.classList.add("now"); 
+            page.classList.add("now");
         }
         page.addEventListener("click", (e) => {
             e.preventDefault();
 
             if (!page.classList.contains("now")) {
                 isCate = document.querySelector(".cate a.now").getAttribute("href").replace("#", "");
-                isLang = document.querySelector("#global a.now").getAttribute('id')
+                isLang = document.querySelector("#global a.now").getAttribute("id");
                 isRegion = isLang.substring(3);
-                isPage = page.getAttribute('href');
+                isPage = page.getAttribute("href");
 
-                
-                setCookie('page', isPage, 1);
+                setCookie("page", isPage, 1);
 
                 document.querySelector("#paging a.now").classList.remove("now");
-                page.classList.add("now"); 
+                page.classList.add("now");
                 document.getElementById("movie-list").innerHTML = "";
 
                 loadMovie(null, isLang, isRegion, isCate, isPage);
@@ -344,35 +347,34 @@ window.onload = function () {
         });
     });
 
-    document.querySelector('a.next').addEventListener('click', ()=>{
-        let nextPage = document.querySelector('#paging a.now').parentElement.nextElementSibling;
+    document.querySelector("a.next").addEventListener("click", () => {
+        let nextPage = document.querySelector("#paging a.now").parentElement.nextElementSibling;
 
-        if( !!nextPage && nextPage.style.display === 'block'  ){
-            nextPage.firstElementChild.click()
+        if (!!nextPage && nextPage.style.display === "block") {
+            nextPage.firstElementChild.click();
         }
-    })
-
-    document.querySelector('a.first').addEventListener('click', ()=>{
-        document.querySelector('#paging ol').firstElementChild.firstElementChild.click();
     });
 
-    document.querySelector('a.prev').addEventListener('click', ()=>{
-        let prevPage = document.querySelector('#paging a.now').parentElement.previousElementSibling;
-        
-        if( !!prevPage && prevPage.style.display === 'block'  ){
-            prevPage.firstElementChild.click()
+    document.querySelector("a.first").addEventListener("click", () => {
+        document.querySelector("#paging ol").firstElementChild.firstElementChild.click();
+    });
+
+    document.querySelector("a.prev").addEventListener("click", () => {
+        let prevPage = document.querySelector("#paging a.now").parentElement.previousElementSibling;
+
+        if (!!prevPage && prevPage.style.display === "block") {
+            prevPage.firstElementChild.click();
         }
-    })
-    document.querySelector('a.last').addEventListener('click', ()=>{
-        document.querySelectorAll('#paging ol li').forEach((i)=>{
-            if( !(i.nextElementSibling) || i.nextElementSibling.style.display === 'none' ){
-                if( i.style.display === "block" ){
+    });
+    document.querySelector("a.last").addEventListener("click", () => {
+        document.querySelectorAll("#paging ol li").forEach((i) => {
+            if (!i.nextElementSibling || i.nextElementSibling.style.display === "none") {
+                if (i.style.display === "block") {
                     i.firstElementChild.click();
-                };
-            };
+                }
+            }
         });
     });
-
 
     // 탑버튼 클릭시 상단으로 부드럽게 스크롤
     const topBtn = document.querySelector("#top-btn");
@@ -394,7 +396,11 @@ window.onload = function () {
         document.querySelector("html").style.fontSize = 62.5 * (480 / 750) + "%";
     }
 
+    /* 상단 fixed 공백 채우기 */
+    document.querySelector(".header-blank").style.height = document.querySelector("#header").clientHeight + "px";
     window.addEventListener("resize", () => {
+        document.querySelector(".header-blank").style.height = document.querySelector("#header").clientHeight + "px";
+
         docWidth = window.innerWidth;
         if (docWidth >= 750) {
             document.querySelector("html").style.fontSize = "62.5%";
@@ -406,22 +412,20 @@ window.onload = function () {
     });
 };
 
-
-
 function setCookie(cookie_name, cookie_value, expire_date) {
     var today = new Date();
     var expire = new Date();
     expire.setTime(today.getTime() + 3600000 * 24 * expire_date);
-    cookies = cookie_name + '=' + cookie_value + '; path=/;';
-    if (expire_date != 0) cookies += 'expires=' + expire.toGMTString();
+    cookies = cookie_name + "=" + cookie_value + "; path=/;";
+    if (expire_date != 0) cookies += "expires=" + expire.toGMTString();
     document.cookie = cookies;
 }
 
 function delCookie(cookie_name) {
-	var _today = new Date();
-	var value = '';
-	_today.setDate(_today.getDate() - 1);
-	document.cookie = cookie_name + "=" + value + '; path=/;' + "; expires=" + _today.toGMTString();
+    var _today = new Date();
+    var value = "";
+    _today.setDate(_today.getDate() - 1);
+    document.cookie = cookie_name + "=" + value + "; path=/;" + "; expires=" + _today.toGMTString();
 }
 
 function getCookie(name) {
@@ -431,10 +435,9 @@ function getCookie(name) {
         return null;
     }
     index = lims.indexOf("=", index) + 1; // first character
-    var endstr = lims.indexOf(';', index);
+    var endstr = lims.indexOf(";", index);
     if (endstr == -1) {
         endstr = lims.length; // last character
     }
     return unescape(lims.substring(index, endstr));
 }
-
