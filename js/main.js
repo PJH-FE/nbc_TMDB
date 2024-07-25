@@ -207,22 +207,13 @@ function makeGrid() {
     document.querySelector("body").style.opacity = "1";
 }
 
-function setCookiem(cookie_name, cookie_value, expire_date) {
-    var today = new Date();
-    var expire = new Date();
-    expire.setTime(today.getTime() + 3600000 * 24 * expire_date);
-    cookies = cookie_name + '=' + cookie_value + '; path=/;';
-    if (expire_date != 0) cookies += 'expires=' + expire.toGMTString();
-    document.cookie = cookies;
-}
-
 // 윈도우 로딩 완료되면
 window.onload = function () {
-    setCookiem('abc',1,1);
-    isCate = location.href.split('#')[1];
-    isLang = document.querySelector("#global a.now").getAttribute('id')
-    isRegion = isLang.substring(3);
-    loadMovie(null, isLang, isRegion, isCate, 1); // 영화 불러오기
+	getCookie('language') != undefined && (isLang = getCookie('language'));
+	getCookie('region') != undefined && (isRegion = getCookie('region'));
+	getCookie('page') != undefined && (isPage = getCookie('page'));
+    
+    loadMovie(null, isLang, isRegion, isCate, isPage); // 영화 불러오기
 
 
 
@@ -295,6 +286,9 @@ window.onload = function () {
                 let nowLang = flag.getAttribute('id');
                 let nowRegion = nowLang.substring(3);
 
+                setCookie(language, nowLang, 1)
+                setCookie(region, nowRegion, 1)
+
                 document.querySelector("#global a.now").classList.remove("now");
                 flag.classList.add("now"); 
                 document.getElementById("movie-list").innerHTML = "";
@@ -317,6 +311,9 @@ window.onload = function () {
                 isLang = document.querySelector("#global a.now").getAttribute('id')
                 isRegion = isLang.substring(3);
                 isPage = page.getAttribute('href');
+
+                
+                setCookie(page, isPage, 1)
 
                 document.querySelector("#paging a.now").classList.remove("now");
                 page.classList.add("now"); 
@@ -358,3 +355,36 @@ window.onload = function () {
         }
     });
 };
+
+
+
+function setCookie(cookie_name, cookie_value, expire_date) {
+    var today = new Date();
+    var expire = new Date();
+    expire.setTime(today.getTime() + 3600000 * 24 * expire_date);
+    cookies = cookie_name + '=' + cookie_value + '; path=/;';
+    if (expire_date != 0) cookies += 'expires=' + expire.toGMTString();
+    document.cookie = cookies;
+}
+
+function delCookie(cookie_name) {
+	var _today = new Date();
+	var value = '';
+	_today.setDate(_today.getDate() - 1);
+	document.cookie = cookie_name + "=" + value + '; path=/;' + "; expires=" + _today.toGMTString();
+}
+
+function getCookie(name) {
+    lims = document.cookie;
+    var index = lims.indexOf(name + "=");
+    if (index == -1) {
+        return null;
+    }
+    index = lims.indexOf("=", index) + 1; // first character
+    var endstr = lims.indexOf(';', index);
+    if (endstr == -1) {
+        endstr = lims.length; // last character
+    }
+    return unescape(lims.substring(index, endstr));
+}
+
