@@ -238,6 +238,7 @@ window.onload = function () {
         item.addEventListener("click", () => {
             if (!item.classList.contains("now")) {
                 // 페이징 초기화
+                delCookie('page');
                 document.querySelector("#paging a.now").classList.remove("now");
                 document.querySelector("#paging ol").firstElementChild.firstElementChild.classList.add("now")
 
@@ -289,6 +290,7 @@ window.onload = function () {
             if (!flag.classList.contains("now")) {
                 document.getElementById("search").value = ""; // 검색창 초기화
                 // 페이징 초기화
+                delCookie('page');
                 document.querySelector("#paging a.now").classList.remove("now");
                 document.querySelector("#paging ol").firstElementChild.firstElementChild.classList.add("now")
                 
@@ -356,7 +358,9 @@ window.onload = function () {
     document.querySelector('a.last').addEventListener('click', ()=>{
         document.querySelectorAll('#paging ol li').forEach((i)=>{
             if( !(i.nextElementSibling) || i.nextElementSibling.style.display === 'none' ){
-                i.firstElementChild.click();
+                if( i.style.display === "block" ){
+                    i.firstElementChild.click();
+                };
             };
         });
     });
