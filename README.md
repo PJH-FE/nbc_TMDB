@@ -65,6 +65,8 @@ TMDB를 이용하여 영화 목록을 불러와 출력합니다.
 <br/><br/>
 
 ## 🖊️ 제작 과정
-[![Velog's GitHub stats](https://velog-readme-stats.vercel.app/api?name=sjrmd781&slug=개인프로젝트-영화-검색사이트)](https://velog.io/@sjrmd781/%EA%B0%9C%EC%9D%B8%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EC%98%81%ED%99%94-%EA%B2%80%EC%83%89%EC%82%AC%EC%9D%B4%ED%8A%B8)
+[![Velog's GitHub stats](https://velog-readme-stats.vercel.app/api?name=sjrmd781&slug=개인프로젝트-영화-검색사이트)](https://velog.io/@sjrmd781/개인프로젝트-영화-검색사이트)
 
-[![Velog's GitHub stats](https://velog-readme-stats.vercel.app/api?name=sjrmd781&slug=개인프로젝트-영화-검색사이트2)](https://velog.io/@sjrmd781/%EA%B0%9C%EC%9D%B8%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EC%98%81%ED%99%94-%EA%B2%80%EC%83%89%EC%82%AC%EC%9D%B4%ED%8A%B82)
+[![Velog's GitHub stats](https://velog-readme-stats.vercel.app/api?name=sjrmd781&slug=개인프로젝트-영화-검색사이트2)](https://velog.io/@sjrmd781/개인프로젝트-영화-검색사이트2)
+
+[![Velog's GitHub stats](https://velog-readme-stats.vercel.app/api?name=sjrmd781&slug=개인프로젝트-영화-검색사이트3)](https://velog.io/@sjrmd781/개인프로젝트-영화-검색사이트3)
