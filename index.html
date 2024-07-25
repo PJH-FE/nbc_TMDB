@@ -37,7 +37,7 @@
         </ul>
 
         <div class="search-box">
-            <input id="search" type="text" placeholder="영화제목을 입력하세요." />
+            <input id="search" type="text" placeholder="Search" />
             <button id="search-btn" onclick="searchMovie()" class="submit"><img src="./img/search.svg"
                     alt="검색 아이콘"></button>
         </div>
@@ -47,6 +47,20 @@
     <div id="wrap">
         <ul id="movie-list">
         </ul>
+
+        <div id="paging">
+            <a href="1" class="first"><img src="./img/first.svg" alt="처음으로"></a>
+            <a href="" class="prev"><img src="./img/prev.svg" alt="이전으로"></a>
+            <ol>
+                <li><a href="1" class="now">1</a></li>
+                <li><a href="2">2</a></li>
+                <li><a href="3">3</a></li>
+                <li><a href="4">4</a></li>
+                <li><a href="5">5</a></li>
+            </ol>
+            <a href="" class="next"><img src="./img/next.svg" alt="다음으로"></a>
+            <a href="5" class="last"><img src="./img/last.svg" alt="마지막으로"></a>
+        </div>
     </div>
 
 
@@ -54,9 +68,9 @@
         <div id="global">
             <span><img src="./img//global.png" alt="언어 선택"></span>
             <ul>
-                <li><a href="#ko-KR"><img src="./img/flag-kr.png" alt="한글"></a></li>
-                <li><a href="#en-US"><img src="./img/flag-us.png" alt="영어"></a></li>
-                <li><a href="#ja-JP"><img src="./img/flag-jp.png" alt="일본어"></a></li>
+                <li><a href="javascript:;" id="ko-KR" class="now"><img src="./img/flag-kr.png" alt="한글"></a></li>
+                <li><a href="javascript:;" id="en-US"><img src="./img/flag-us.png" alt="영어"></a></li>
+                <li><a href="javascript:;" id="ja-JP"><img src="./img/flag-jp.png" alt="일본어"></a></li>
             </ul>
         </div>
         <div id="top-btn"><img src="./img/top-btn.svg" alt=""></div>

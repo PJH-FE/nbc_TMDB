@@ -135,6 +135,10 @@ body {
     min-width: 100%;
     min-height: 100%;
     object-fit: cover;
+    transition: 0.5s;
+}
+#movie-list li.card:hover .poster img {
+    transform: scale(1.05);
 }
 
 /* 영화 정보 */
@@ -147,25 +151,29 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1.2rem;
+    gap: 0.8rem;
     width: 100%;
     height: 100%;
     padding: 4%;
     background: rgba(0, 0, 0, 0.8);
     color: #fff;
-    word-break: keep-all;
     text-align: center;
     transition: 0.5s;
     cursor: pointer;
     overflow-y: auto;
+    backdrop-filter: blur(4px);
 }
 #movie-list li.card:hover .info {
     opacity: 1;
     visibility: visible;
 }
 
-#movie-list li.card .info .title {
+#movie-list li.card .info .date {
     margin-top: auto;
+    font-size: 1.6rem;
+    font-weight: 400;
+}
+#movie-list li.card .info .title {
     font-size: 2.4rem;
     font-weight: 700;
 }
@@ -185,6 +193,42 @@ body {
     #movie-list li.card.big-title .info .overview {
         font-size: 2.4rem;
     }
+}
+
+#paging {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    padding: 1.2rem 0;
+}
+
+#paging a {
+    display: flex; align-items: center; justify-content: center;
+    width: 24px;
+    height: 24px;
+    text-decoration: none;
+    color: #fff;
+    font-size: 14px;
+}
+#paging a.now {
+    font-weight: 700;
+    border: 1px solid #fff;
+}
+
+#paging img {
+    width: 14px;
+    height: 14px;
+}
+
+#paging ol {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
 }
 
 /* 탑버튼 */
@@ -208,8 +252,11 @@ body {
 }
 #global {
     position: relative;
-    display: flex; align-items: center; justify-content: center;
-    width: 40px; height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
 }
 #global > span {
     display: flex;
@@ -219,28 +266,37 @@ body {
     background-color: #fff;
     border-radius: 100%;
 }
+#global:hover ul {
+    opacity: 1;
+    visibility: visible;
+}
 #global ul {
     position: absolute;
     top: 0;
     right: 100%;
-    display: flex; align-items: center; gap: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
     width: auto;
     height: 100%;
-    margin: 0; 
+    margin: 0;
     padding: 8px;
     background-color: #fff;
     border-radius: 32px;
     list-style: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s;
 }
 #global ul li {
     height: 100%;
 }
 #global ul li a {
-    display: block; 
+    display: block;
     width: auto;
     height: 100%;
 }
 #global ul li a img {
-    width: auto;
+    max-width: unset;
     height: 100%;
 }

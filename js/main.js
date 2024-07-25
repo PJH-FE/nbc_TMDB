@@ -18,30 +18,57 @@ if (region === "ko") {
 } else if (region === "jp") {
     lang = "ja-JP";
 }
-region = lang.substr(3, 5);
+region = lang.substring(3);
+
 
 // 영화 목록 불러오기
-let loadMovie = (v, currLang, currRegion, currCate) => {
+let loadMovie = (v, currLang, currRegion, currCate, currPage) => {
     document.querySelector("body").style.opacity = "0";
 
     // 지역, 언어, 카테고리 기본값 세팅 => 현재 지역, 언어, top_rated
+    (currCate === null || currCate === undefined || currCate === "") && (currCate = "top_rated");
     (currLang === null || currLang === undefined || currLang === "") && (currLang = lang);
     (currRegion === null || currRegion === undefined || currRegion === "") && (currRegion = region);
-    (currCate === null || currCate === undefined || currCate === "") && (currCate = "top_rated");
+    (currPage === null || currPage === undefined || currPage === "") && (currPage = 1);
 
-    fetch(`https://api.themoviedb.org/3/movie/${currCate}?language=${currLang}&page=1&region=${currRegion}`, options)
+    fetch(`https://api.themoviedb.org/3/movie/${currCate}?language=${currLang}&page=${currPage}&region=${currRegion}`, options)
         .then((response) => response.json())
         .then((response) => {
+            document.querySelectorAll('#paging ol li').forEach((i)=>{
+                parseInt(i.innerText) > response.total_pages ? i.style.display = "none" : i.style.display = "block";
+            })
+            
             response.results.map((i) => {
-                let ratingStar = Math.round(i.vote_average) >= 9 ? "⭐⭐⭐⭐⭐" : "⭐⭐⭐⭐"; // 별점
+                let ratingStar = Math.round(i.vote_average); // 별점
+                if( ratingStar >= 9){ 
+                    ratingStar = "⭐⭐⭐⭐⭐"
+                } else if(ratingStar >= 7){
+                    ratingStar = "⭐⭐⭐⭐"
+                } else if(ratingStar >= 5){
+                    ratingStar = "⭐⭐⭐"
+                } else if(ratingStar >= 3){
+                    ratingStar = "⭐⭐"
+                } else{
+                    ratingStar = "⭐"
+                };
+
+                let alertMsg;
+                if ( currRegion === "KR" ){
+                    alertMsg = `영화의 ID는 ${i.id}입니다.`;
+                } else if ( currRegion === "JP" ) {
+                    alertMsg = `映画のIDは$ {i.id}です。`;
+                } else {
+                    alertMsg = `The ID of the movie is ${i.id}`;
+                }
 
                 if (v === null || v === undefined || v === "") {
                     document.getElementById("movie-list").insertAdjacentHTML(
                         "beforeend",
                         `
                         <li class="card">
-                            <div class="poster"><img src="https://image.tmdb.org/t/p/original${i.poster_path}" alt="${i.title}"></div>
-                            <div class="info" onclick="alert('영화의 ID는 ${i.id}입니다.')">
+                            <div class="poster"><img src="https://image.tmdb.org/t/p/w500${i.poster_path}" alt="${i.title}"></div>
+                            <div class="info" onclick="alert('${alertMsg}')">
+                                <div class="date">${i.release_date}</div>
                                 <div class="title">${i.title}</div>
                                 <div class="vote-average">Rating : ${ratingStar} (${i.vote_average})</div>
                                 <div class="overview">${i.overview}</div>
@@ -57,8 +84,8 @@ let loadMovie = (v, currLang, currRegion, currCate) => {
                             "beforeend",
                             `
                             <li class="card">
-                                <div class="poster"><img src="https://image.tmdb.org/t/p/original${i.poster_path}" alt="${i.title}"></div>
-                                <div class="info" onclick="alert('영화의 ID는 ${i.id}입니다.')">
+                                <div class="poster"><img src="https://image.tmdb.org/t/p/w500${i.poster_path}" alt="${i.title}"></div>
+                                <div class="info" onclick="alert('${alertMsg}')">
                                     <div class="title">${i.title}</div>
                                     <div class="vote-average">Rating : ${ratingStar} (${i.vote_average})</div>
                                     <div class="overview">${i.overview}</div>
@@ -82,10 +109,22 @@ let loadMovie = (v, currLang, currRegion, currCate) => {
             } else {
                 // 일치하는 검색어가 없을경우, 얼럿 노출 후 검색창과 영화목록 초기화
                 if (document.querySelectorAll(".card").length == 0) {
-                    alert("일치하는 영화가 없습니다.");
+                    isLang = document.querySelector("#global a.now").getAttribute('id')
+                    isRegion = isLang.substring(3);
+                
+                    let noResult;
+                    if ( isRegion === "KR" ){
+                        noResult = "일치하는 영화가 없습니다.";
+                    } else if ( isRegion === "JP" ) {
+                        noResult = "「一致する映画はありません。」";
+                    } else {
+                        noResult = "There are no matching movies.";
+                    }
+
+                    alert(noResult);
                     document.getElementById("movie-list").classList.remove("search-result");
                     document.getElementById("search").value = null;
-                    loadMovie();
+                    loadMovie(null, currLang, currRegion, currCate);
                 } else {
                     // 검색된 영화 갯수 출력
                     document.getElementById("movie-list").before(resultCount(document.getElementById("movie-list").childElementCount));
@@ -95,11 +134,31 @@ let loadMovie = (v, currLang, currRegion, currCate) => {
         .catch((err) => console.error(err));
 };
 
+
+// 변수명 생성
+let isCate;
+let isLang;
+let isRegion;
+let isPage;
+
+
 // 검색된 영화 갯수 div생성 (createElement 써보기)
 function resultCount(count) {
+    isLang = document.querySelector("#global a.now").getAttribute('id')
+    isRegion = isLang.substring(3);
+
+    let totalMsg;
+    if ( isRegion === "KR" ){
+        totalMsg = `검색된 영화는 총 <span>${count}</span>개입니다.`;
+    } else if ( isRegion === "JP" ) {
+        totalMsg = `検索された映画は合計$ <span>${count}</span>です`;
+    } else {
+        totalMsg = `A total of <span>${count}</span> movies were searched.`;
+    }
+
     let result = document.createElement("div");
     result.className = "result-count";
-    result.innerHTML = `검색된 영화는 총 <span>${count}</span>개 입니다.`;
+    result.innerHTML = totalMsg;
 
     return result;
 }
@@ -113,8 +172,16 @@ function searchMovie() {
     } else {
         document.getElementById("movie-list").classList.add("search-result");
         document.getElementById("movie-list").innerHTML = "";
-        loadMovie(keyword);
+        
+        isCate = document.querySelector(".cate a.now").getAttribute("href").replace("#", "");
+        isLang = document.querySelector("#global a.now").getAttribute('id')
+        isRegion = isLang.substring(3);
+        isPage = document.querySelector("#paging li a.now").getAttribute("href");
+
+        loadMovie(keyword, isLang, isRegion, isCate, isPage);
     }
+
+    document.getElementById("search").value = "";
 }
 
 // 그리드 조정
@@ -140,21 +207,51 @@ function makeGrid() {
     document.querySelector("body").style.opacity = "1";
 }
 
+function setCookiem(cookie_name, cookie_value, expire_date) {
+    var today = new Date();
+    var expire = new Date();
+    expire.setTime(today.getTime() + 3600000 * 24 * expire_date);
+    cookies = cookie_name + '=' + cookie_value + '; path=/;';
+    if (expire_date != 0) cookies += 'expires=' + expire.toGMTString();
+    document.cookie = cookies;
+}
+
 // 윈도우 로딩 완료되면
 window.onload = function () {
-    loadMovie(); // 영화 불러오기
+    setCookiem('abc',1,1);
+    isCate = location.href.split('#')[1];
+    isLang = document.querySelector("#global a.now").getAttribute('id')
+    isRegion = isLang.substring(3);
+    loadMovie(null, isLang, isRegion, isCate, 1); // 영화 불러오기
+
+
 
     // 카테고리 클릭시
     let cate = document.querySelectorAll(".cate > a");
 
     cate.forEach((item) => {
+        if( item.getAttribute('href') === '#' + isCate ){
+            document.querySelector(".cate a.now").classList.remove("now");
+            item.classList.add("now");
+        }
+
         item.addEventListener("click", () => {
             if (!item.classList.contains("now")) {
+                // 페이징 초기화
+                document.querySelector("#paging a.now").classList.remove("now");
+                document.querySelector("#paging ol").firstElementChild.firstElementChild.classList.add("now")
+
+                document.getElementById("movie-list").innerHTML = ""; // 영화목록 초기화
+
+                // 현재 카테고리 강조
                 document.querySelector(".cate a.now").classList.remove("now");
                 item.classList.add("now");
+
+                // 현재 카테고리의 영화 불러오기
                 let nowCate = item.getAttribute("href").replace("#", "");
-                document.getElementById("movie-list").innerHTML = "";
-                loadMovie(null, null, null, nowCate);
+                isLang = document.querySelector("#global a.now").getAttribute('id')
+                isRegion = isLang.substring(3);
+                loadMovie(null, isLang, isRegion, nowCate, 1);
             }
         });
     });
@@ -163,6 +260,12 @@ window.onload = function () {
     searchInput.focus(); // 검색창에 포커스
 
     searchInput.addEventListener("keyup", function (e) {
+        
+        isCate = document.querySelector(".cate a.now").getAttribute("href").replace("#", "");
+        isLang = document.querySelector("#global a.now").getAttribute('id')
+        isRegion = isLang.substring(3);
+        isPage = document.querySelector("#paging li a.now").getAttribute("href");
+
         if (e.key === "Enter") {
             // 검색창에서 엔터 눌렀을 때
             searchMovie();
@@ -172,8 +275,56 @@ window.onload = function () {
             // 검색결과가 있는 상태에서 검색창내용 지웠을 때
             document.getElementById("movie-list").classList.remove("search-result");
             document.getElementById("movie-list").innerHTML = "";
-            loadMovie();
+            loadMovie(null, isLang, isRegion, isCate, isPage);
         }
+    });
+
+
+    // 언어 선택시
+    let global = document.querySelectorAll("#global ul li a");
+
+    global.forEach((flag) => {
+        flag.addEventListener("click", () => {
+            if (!flag.classList.contains("now")) {
+                document.getElementById("search").value = ""; // 검색창 초기화
+                // 페이징 초기화
+                document.querySelector("#paging a.now").classList.remove("now");
+                document.querySelector("#paging ol").firstElementChild.firstElementChild.classList.add("now")
+                
+
+                let nowLang = flag.getAttribute('id');
+                let nowRegion = nowLang.substring(3);
+
+                document.querySelector("#global a.now").classList.remove("now");
+                flag.classList.add("now"); 
+                document.getElementById("movie-list").innerHTML = "";
+
+                isCate = location.href.split('#')[1];
+                !!isCate ? loadMovie(null, nowLang, nowRegion, isCate, 1) : loadMovie(null, nowLang, nowRegion, null, 1)
+            }
+        });
+    });
+
+    // 페이징
+    let paging = document.querySelectorAll("#paging li a");
+
+    paging.forEach((page) => {
+        page.addEventListener("click", (e) => {
+            e.preventDefault();
+
+            if (!page.classList.contains("now")) {
+                isCate = document.querySelector(".cate a.now").getAttribute("href").replace("#", "");
+                isLang = document.querySelector("#global a.now").getAttribute('id')
+                isRegion = isLang.substring(3);
+                isPage = page.getAttribute('href');
+
+                document.querySelector("#paging a.now").classList.remove("now");
+                page.classList.add("now"); 
+                document.getElementById("movie-list").innerHTML = "";
+
+                loadMovie(null, isLang, isRegion, isCate, isPage);
+            }
+        });
     });
 
     // 탑버튼 클릭시 상단으로 부드럽게 스크롤
