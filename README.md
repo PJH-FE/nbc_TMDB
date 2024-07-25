@@ -1,6 +1,12 @@
+![header](https://capsule-render.vercel.app/api?text=MOVIE%20LIST&animation=blinking&fontColor=ffffff&type=venom&height=150)
+
+
 # 내일배움캠프_개인과제(영화 검색 사이트)
-## Info
-TMDB를 이용하여 Top Rated의 영화 20개를 보여주는 사이트
+<br/>
+
+## Preview
+![alt text](image.png)
+TMDB를 이용하여 영화 목록을 불러와 출력합니다.
 
 ## 목표
 - 영화정보 오픈API인 TMDB(The Movie DB)를 사용하기
@@ -42,3 +48,14 @@ TMDB를 이용하여 Top Rated의 영화 20개를 보여주는 사이트
 - 상단 fixed
 - rem 이용하여 특정 사이즈들 반응형으로 적용
 
+## 사용 언어
+[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=pjh-fe)](https://github.com/anuraghazra/github-readme-stats)
+<br/>
+![js](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=white)
+![css](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+![html](https://img.shields.io/badge/HTML-239120?style=for-the-badge&logo=html5&logoColor=white)
+
+## 제작 과정
+[![Velog's GitHub stats](https://velog-readme-stats.vercel.app/api?name=sjrmd781&slug=개인프로젝트-영화-검색사이트)](https://velog.io/@sjrmd781/%EA%B0%9C%EC%9D%B8%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EC%98%81%ED%99%94-%EA%B2%80%EC%83%89%EC%82%AC%EC%9D%B4%ED%8A%B8)
+
+[![Velog's GitHub stats](https://velog-readme-stats.vercel.app/api?name=sjrmd781&slug=개인프로젝트-영화-검색사이트2)](https://velog.io/@sjrmd781/%EA%B0%9C%EC%9D%B8%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EC%98%81%ED%99%94-%EA%B2%80%EC%83%89%EC%82%AC%EC%9D%B4%ED%8A%B82)
