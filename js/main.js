@@ -7,8 +7,7 @@ const options = {
     },
 };
 
-let type = navigator.appName;
-let region = type == "Netscape" ? navigator.language : navigator.userLanguage.substr(0, 2);
+let region = navigator.language;
 region !== "ko" && region !== "en" && region !== "jp" && (region = "en"); // default 언어 = en
 let lang = "en-US"; // default 지역 = US
 
@@ -334,6 +333,34 @@ window.onload = function () {
             }
         });
     });
+
+    document.querySelector('a.next').addEventListener('click', ()=>{
+        let nextPage = document.querySelector('#paging a.now').parentElement.nextElementSibling;
+
+        if( !!nextPage && nextPage.style.display === 'block'  ){
+            nextPage.firstElementChild.click()
+        }
+    })
+
+    document.querySelector('a.first').addEventListener('click', ()=>{
+        document.querySelector('#paging ol').firstElementChild.firstElementChild.click();
+    });
+
+    document.querySelector('a.prev').addEventListener('click', ()=>{
+        let prevPage = document.querySelector('#paging a.now').parentElement.previousElementSibling;
+        
+        if( !!prevPage && prevPage.style.display === 'block'  ){
+            prevPage.firstElementChild.click()
+        }
+    })
+    document.querySelector('a.last').addEventListener('click', ()=>{
+        document.querySelectorAll('#paging ol li').forEach((i)=>{
+            if( !(i.nextElementSibling) || i.nextElementSibling.style.display === 'none' ){
+                i.firstElementChild.click();
+            };
+        });
+    });
+
 
     // 탑버튼 클릭시 상단으로 부드럽게 스크롤
     const topBtn = document.querySelector("#top-btn");
