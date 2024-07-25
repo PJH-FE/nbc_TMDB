@@ -8,13 +8,13 @@ const options = {
 };
 
 let region = navigator.language;
-region !== "ko" && region !== "en" && region !== "jp" && (region = "en"); // default 언어 = en
+region !== "ko" && region !== "en" && region !== "ja" && (region = "en"); // default 언어 = en
 let lang = "en-US"; // default 지역 = US
 
 // 한국 or 일본만 예외처리
 if (region === "ko") {
     lang = "ko-KR";
-} else if (region === "jp") {
+} else if (region === "ja") {
     lang = "ja-JP";
 }
 region = lang.substring(3);
@@ -54,7 +54,7 @@ let loadMovie = (v, currLang, currRegion, currCate, currPage) => {
                 if (currRegion === "KR") {
                     alertMsg = `영화의 ID는 ${i.id}입니다.`;
                 } else if (currRegion === "JP") {
-                    alertMsg = `映画のIDは$ {i.id}です。`;
+                    alertMsg = `映画のIDは${i.id}です。`;
                 } else {
                     alertMsg = `The ID of the movie is ${i.id}`;
                 }
@@ -147,7 +147,7 @@ function resultCount(count) {
     if (isRegion === "KR") {
         totalMsg = `검색된 영화는 총 <span>${count}</span>개입니다.`;
     } else if (isRegion === "JP") {
-        totalMsg = `検索された映画は合計$ <span>${count}</span>です`;
+        totalMsg = `検索された映画は合計 <span>${count}</span>です`;
     } else {
         totalMsg = `A total of <span>${count}</span> movies were searched.`;
     }
@@ -217,7 +217,7 @@ function makeGrid() {
 
 // 윈도우 로딩 완료되면
 window.onload = function () {
-    getCookie("language") != undefined ? isLang = getCookie("language") : isLang = lang;
+    getCookie("language") != undefined ? (isLang = getCookie("language")) : (isLang = lang);
     getCookie("region") != undefined && (isRegion = getCookie("region"));
     getCookie("page") != undefined && (isPage = getCookie("page"));
 
@@ -422,22 +422,13 @@ function setCookie(cookie_name, cookie_value, expire_date) {
 }
 
 function delCookie(cookie_name) {
-    var _today = new Date();
-    var value = "";
-    _today.setDate(_today.getDate() - 1);
-    document.cookie = cookie_name + "=" + value + "; path=/;" + "; expires=" + _today.toGMTString();
+    let today = new Date();
+    let value = "";
+    today.setDate(today.getDate() - 1);
+    document.cookie = cookie_name + "=" + value + "; path=/;" + "; expires=" + today.toGMTString();
 }
 
 function getCookie(name) {
-    lims = document.cookie;
-    var index = lims.indexOf(name + "=");
-    if (index == -1) {
-        return null;
-    }
-    index = lims.indexOf("=", index) + 1; // first character
-    var endstr = lims.indexOf(";", index);
-    if (endstr == -1) {
-        endstr = lims.length; // last character
-    }
-    return unescape(lims.substring(index, endstr));
+    let matches = document.cookie.match(new RegExp("(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, "\\$1") + "=([^;]*)"));
+    return matches ? decodeURIComponent(matches[1]) : undefined;
 }
