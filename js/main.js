@@ -220,13 +220,11 @@ window.onload = function () {
 
     // 로고 클릭시 기본화면으로const topBtn = document.querySelector("#top-btn");
     let logo = document.querySelector("a.logo");
+    logo.setAttribute('href', location.pathname);
     logo.addEventListener("click", (e) => {
-        console.log(location.pathname)
         delCookie('language');
         delCookie('region');
         delCookie('page');
-        document.getElementById("movie-list").innerHTML = ""; // 영화목록 초기화
-        loadMovie();
     });
 
     // 카테고리 클릭시
