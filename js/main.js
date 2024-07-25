@@ -217,9 +217,9 @@ function makeGrid() {
 
 // 윈도우 로딩 완료되면
 window.onload = function () {
-    getCookie("language") != lang && (isLang = getCookie("language"));
-    getCookie("region") != region && (isRegion = getCookie("region"));
-    getCookie("page") != 1 && (isPage = getCookie("page"));
+    getCookie("language") != undefined ? isLang = getCookie("language") : isLang = lang;
+    getCookie("region") != undefined && (isRegion = getCookie("region"));
+    getCookie("page") != undefined && (isPage = getCookie("page"));
 
     isCate = location.href.split("#")[1];
     document.querySelector("#global a.now").classList.remove("now");
