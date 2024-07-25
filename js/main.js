@@ -213,6 +213,8 @@ window.onload = function () {
 	getCookie('page') != undefined && (isPage = getCookie('page'));
 
     isCate = location.href.split('#')[1];
+    document.querySelector("#global a.now").classList.remove("now");
+    document.querySelector('#global #' + isLang).classList.add("now")
     
     loadMovie(null, isLang, isRegion, isCate, isPage); // 영화 불러오기
 
