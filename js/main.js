@@ -188,8 +188,6 @@ function searchMovie() {
 
         loadMovie(keyword, isLang, isRegion, isCate, isPage);
     }
-
-    document.getElementById("search").value = "";
 }
 
 // 그리드 조정
