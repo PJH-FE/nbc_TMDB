@@ -220,7 +220,11 @@ window.onload = function () {
 
     // 로고 클릭시 기본화면으로const topBtn = document.querySelector("#top-btn");
     let logo = document.querySelector("a.logo");
-    logo.addEventListener("click", () => {
+    logo.addEventListener("click", (e) => {
+        console.log(location.pathname)
+        delCookie('language');
+        delCookie('region');
+        delCookie('page');
         document.getElementById("movie-list").innerHTML = ""; // 영화목록 초기화
         loadMovie();
     });
@@ -374,6 +378,13 @@ function setCookie(cookie_name, cookie_value, expire_date) {
     cookies = cookie_name + '=' + cookie_value + '; path=/;';
     if (expire_date != 0) cookies += 'expires=' + expire.toGMTString();
     document.cookie = cookies;
+}
+
+function delCookie(cookie_name) {
+	var _today = new Date();
+	var value = '';
+	_today.setDate(_today.getDate() - 1);
+	document.cookie = cookie_name + "=" + value + '; path=/;' + "; expires=" + _today.toGMTString();
 }
 
 function getCookie(name) {
