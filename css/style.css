@@ -33,12 +33,38 @@ body {
     font-weight: 700;
 }
 
+/* 카테고리 */
+#header .cate {
+    display: flex;
+    align-items: center;
+    gap: 1.4rem;
+    margin-right: auto;
+    padding-left: 3rem;
+}
+#header .cate a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.4rem;
+}
+#header .cate a.now {
+    text-decoration: underline;
+    text-underline-offset: 8px;
+    font-weight: 700;
+}
+
 /* 검색창 */
 #header .search-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 20rem;
     border-bottom: 1px solid #fff;
+    font-size: 0;
+    line-height: 1;
 }
 
 #header .search-box #search {
+    width: calc(100% - 20px);
     outline: none;
     background-color: transparent;
     border: 0;
@@ -100,6 +126,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100%;
+    height: 100%;
     overflow: hidden;
 }
 
@@ -159,18 +187,60 @@ body {
     }
 }
 
-
-
 /* 탑버튼 */
-#top-btn {
+#useful-btn {
     position: fixed;
     bottom: 4%;
     right: 4%;
-    width: 40px; 
-    height: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    width: 40px;
     cursor: pointer;
+}
+#top-btn {
+    width: 100%;
 }
 #top-btn img {
     width: 100%;
+    height: 100%;
+}
+#global {
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+    width: 40px; height: 40px;
+}
+#global > span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 33px;
+    background-color: #fff;
+    border-radius: 100%;
+}
+#global ul {
+    position: absolute;
+    top: 0;
+    right: 100%;
+    display: flex; align-items: center; gap: 8px;
+    width: auto;
+    height: 100%;
+    margin: 0; 
+    padding: 8px;
+    background-color: #fff;
+    border-radius: 32px;
+    list-style: none;
+}
+#global ul li {
+    height: 100%;
+}
+#global ul li a {
+    display: block; 
+    width: auto;
+    height: 100%;
+}
+#global ul li a img {
+    width: auto;
     height: 100%;
 }

@@ -30,6 +30,12 @@
     <div id="header">
         <a href="/" class="logo">Movie List</a>
 
+        <ul class="cate">
+            <a href="#top_rated" class="now">Top Rated</a>
+            <a href="#now_playing">Now Playing</a>
+            <a href="#upcoming">Upcoming</a>
+        </ul>
+
         <div class="search-box">
             <input id="search" type="text" placeholder="영화제목을 입력하세요." />
             <button id="search-btn" onclick="searchMovie()" class="submit"><img src="./img/search.svg"
@@ -43,7 +49,18 @@
         </ul>
     </div>
 
-    <div id="top-btn"><img src="./img/top-btn.svg" alt=""></div>
+
+    <div id="useful-btn">
+        <div id="global">
+            <span><img src="./img//global.png" alt="언어 선택"></span>
+            <ul>
+                <li><a href="#ko-KR"><img src="./img/flag-kr.png" alt="한글"></a></li>
+                <li><a href="#en-US"><img src="./img/flag-us.png" alt="영어"></a></li>
+                <li><a href="#ja-JP"><img src="./img/flag-jp.png" alt="일본어"></a></li>
+            </ul>
+        </div>
+        <div id="top-btn"><img src="./img/top-btn.svg" alt=""></div>
+    </div>
 </body>
 
 </html>
