@@ -214,6 +214,7 @@ window.onload = function () {
 
     isCate = location.href.split('#')[1];
     document.querySelector("#global a.now").classList.remove("now");
+    console.log(document.querySelector('#global #' + isLang), isLang)
     document.querySelector('#global #' + isLang).classList.add("now")
     
     loadMovie(null, isLang, isRegion, isCate, isPage); // 영화 불러오기
@@ -317,6 +318,11 @@ window.onload = function () {
     let paging = document.querySelectorAll("#paging li a");
 
     paging.forEach((page) => {
+        getCookie('page') != undefined && (isPage = getCookie('page'));
+        if( isPage === page.innerTEXT ){
+            document.querySelector("#paging a.now").classList.remove("now");
+            page.classList.add("now"); 
+        }
         page.addEventListener("click", (e) => {
             e.preventDefault();
 
