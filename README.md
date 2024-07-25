@@ -1,14 +1,16 @@
 ![header](https://capsule-render.vercel.app/api?text=MOVIE%20LIST&animation=blinking&fontColor=ffffff&type=venom&height=150)
 
 
-# 내일배움캠프_개인과제(영화 검색 사이트)
+# <p align="center">내일배움캠프_개인과제(영화 검색 사이트)</p>
 <br/>
 
-## Preview
+## 🎞️ Preview
 ![alt text](image.png)
 TMDB를 이용하여 영화 목록을 불러와 출력합니다.
 
-## 목표
+<br/><br/>
+
+## 🔥 목표
 - 영화정보 오픈API인 TMDB(The Movie DB)를 사용하기
 - 영화 리스트 및 검색 구현
 - 바닐라 자바스크립트만 사용하기
@@ -17,8 +19,10 @@ TMDB를 이용하여 영화 목록을 불러와 출력합니다.
 - 배열 메소드 사용해보기
 - DOM 제어해보기
 
+<br/><br/>
 
-## 구현 기능
+
+## ⚒️ 구현 기능
 - 영화 리스트 출력
     - 언어별 출력 (한국어, 영문, 일문)
         - 접속 브라우저 세팅 언어로 default값 설정
@@ -48,14 +52,19 @@ TMDB를 이용하여 영화 목록을 불러와 출력합니다.
 - 상단 fixed
 - rem 이용하여 특정 사이즈들 반응형으로 적용
 
-## 사용 언어
+<br/><br/>
+
+
+## 📚 사용 언어
 [![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=pjh-fe)](https://github.com/anuraghazra/github-readme-stats)
 <br/>
 ![js](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=white)
 ![css](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 ![html](https://img.shields.io/badge/HTML-239120?style=for-the-badge&logo=html5&logoColor=white)
 
-## 제작 과정
+<br/><br/>
+
+## 🖊️ 제작 과정
 [![Velog's GitHub stats](https://velog-readme-stats.vercel.app/api?name=sjrmd781&slug=개인프로젝트-영화-검색사이트)](https://velog.io/@sjrmd781/%EA%B0%9C%EC%9D%B8%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EC%98%81%ED%99%94-%EA%B2%80%EC%83%89%EC%82%AC%EC%9D%B4%ED%8A%B8)
 
 [![Velog's GitHub stats](https://velog-readme-stats.vercel.app/api?name=sjrmd781&slug=개인프로젝트-영화-검색사이트2)](https://velog.io/@sjrmd781/%EA%B0%9C%EC%9D%B8%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EC%98%81%ED%99%94-%EA%B2%80%EC%83%89%EC%82%AC%EC%9D%B4%ED%8A%B82)
