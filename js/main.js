@@ -212,6 +212,8 @@ window.onload = function () {
 	getCookie('language') != undefined && (isLang = getCookie('language'));
 	getCookie('region') != undefined && (isRegion = getCookie('region'));
 	getCookie('page') != undefined && (isPage = getCookie('page'));
+
+    isCate = location.href.split('#')[1];
     
     loadMovie(null, isLang, isRegion, isCate, isPage); // 영화 불러오기
 
@@ -237,6 +239,7 @@ window.onload = function () {
                 // 현재 카테고리 강조
                 document.querySelector(".cate a.now").classList.remove("now");
                 item.classList.add("now");
+                
 
                 // 현재 카테고리의 영화 불러오기
                 let nowCate = item.getAttribute("href").replace("#", "");
@@ -286,8 +289,8 @@ window.onload = function () {
                 let nowLang = flag.getAttribute('id');
                 let nowRegion = nowLang.substring(3);
 
-                setCookie(language, nowLang, 1)
-                setCookie(region, nowRegion, 1)
+                setCookie('language', nowLang, 1);
+                setCookie('region', nowRegion, 1);
 
                 document.querySelector("#global a.now").classList.remove("now");
                 flag.classList.add("now"); 
@@ -313,7 +316,7 @@ window.onload = function () {
                 isPage = page.getAttribute('href');
 
                 
-                setCookie(page, isPage, 1)
+                setCookie('page', isPage, 1);
 
                 document.querySelector("#paging a.now").classList.remove("now");
                 page.classList.add("now"); 
