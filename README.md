@@ -70,3 +70,6 @@ TMDB를 이용하여 영화 목록을 불러와 출력합니다.
 [![Velog's GitHub stats](https://velog-readme-stats.vercel.app/api?name=sjrmd781&slug=개인프로젝트-영화-검색사이트2)](https://velog.io/@sjrmd781/개인프로젝트-영화-검색사이트2)
 
 [![Velog's GitHub stats](https://velog-readme-stats.vercel.app/api?name=sjrmd781&slug=개인프로젝트-영화-검색사이트3)](https://velog.io/@sjrmd781/개인프로젝트-영화-검색사이트3)
+
+[![Velog's GitHub stats](https://velog-readme-stats.vercel.app/api?name=sjrmd781&slug=개인프로젝트-영화-검색사이트4)](https://velog.io/@sjrmd781/개인프로젝트-영화-검색사이트4)
+
