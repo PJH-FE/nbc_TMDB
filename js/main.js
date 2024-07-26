@@ -230,7 +230,9 @@ function searchMovie() {
         isCate = !document.querySelector(".cate a.now") ? "top_rated" : document.querySelector(".cate a.now").getAttribute("href").replace("#", "");
         isLang = document.querySelector("#global a.now").getAttribute("id");
         isRegion = isLang.substring(3);
-        isPage = document.querySelector("#paging li a.now").getAttribute("href");
+        document.querySelector("#paging li a.now").classList.remove('now')
+        document.querySelector("#paging li:first-child a").classList.add('now')
+
 
         loadMovie(keyword, isLang, isRegion, isCate, 1);
     }
@@ -376,8 +378,6 @@ window.onload = function () {
 
             if (!page.classList.contains("now")) {
                 window.scrollTo(0, 0);
-
-                isCate = !document.querySelector(".cate a.now") ? "top_rated" : document.querySelector(".cate a.now").getAttribute("href").replace("#", "");
                 isLang = document.querySelector("#global a.now").getAttribute("id");
                 isRegion = isLang.substring(3);
                 isPage = page.getAttribute("href");
@@ -388,7 +388,11 @@ window.onload = function () {
                 page.classList.add("now");
                 document.getElementById("movie-list").innerHTML = "";
 
-                loadMovie(document.getElementById("search").value, isLang, isRegion, isCate, isPage);
+                if( !document.querySelector(".cate a.now") ){
+                    loadMovie(document.getElementById("search").value, isLang, isRegion, isCate, isPage);
+                } else {
+                    loadMovie(null, isLang, isRegion, document.querySelector(".cate a.now").getAttribute("href").replace("#", ""), isPage);
+                }
             }
         });
     });
