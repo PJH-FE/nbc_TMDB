@@ -4,6 +4,11 @@
 # <p align="center">내일배움캠프_개인과제(영화 검색 사이트)</p>
 <br/>
 
+## ⭐ 배포URL
+https://pjh-fe.github.io/nbc_TMDB
+<br/><br/>
+
+
 ## 🎞️ Preview
 ![alt text](image.png)
 TMDB를 이용하여 영화 목록을 불러와 출력합니다.
